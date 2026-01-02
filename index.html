@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nyoni Business Hub - Huduma na Bidhaa Bora</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Staili za kichwa na navigesheni */
+        header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+            color: #ffcc00;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover, nav ul li a.active {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: #ffcc00;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .auth-btn {
+            background-color: #ffcc00;
+            color: #1e3c72;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .auth-btn:hover {
+            background-color: #ffd633;
+            transform: translateY(-2px);
+        }
+        
+        .auth-btn.logout {
+            background-color: #e74c3c;
+            color: white;
+            display: none;
+        }
+        
+        .auth-btn.logout:hover {
+            background-color: #c0392b;
+        }
+        
+        /* Staili za sehemu kuu */
+        section {
+            padding: 4rem 0;
+            min-height: 80vh;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #1e3c72;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #ffcc00;
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+        
+        /* Sehemu ya Nyumbani */
+        #home {
+            background: linear-gradient(rgba(30, 60, 114, 0.9), rgba(42, 82, 152, 0.9)), url('https://files.catbox.moe/3wixqf.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .home-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .home-content h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            color: #ffcc00;
+        }
+        
+        .home-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        
+        .welcome-icon {
+            font-size: 4rem;
+            color: #ffcc00;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Sehemu ya Huduma */
+        #services {
+            background-color: #f0f4f8;
+        }
+        
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .service-img {
+            width: 100%;
+            height: 220px;
+            background-color: #e9ecef;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .service-info {
+            padding: 1.5rem;
+        }
+        
+        .service-info h3 {
+            color: #1e3c72;
+            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
+        }
+        
+        .service-info p {
+            color: #666;
+            margin-bottom: 1.2rem;
+            min-height: 60px;
+        }
+        
+        .service-price {
+            color: #e74c3c;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .service-type {
+            display: inline-block;
+            background-color: #e1f0ff;
+            color: #1e3c72;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        /* Sehemu ya Mawasiliano */
+        #contact {
+            background-color: white;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        
+        .contact-form {
+            background-color: #f8f9fa;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-details {
+            background-color: #f0f4f8;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #1e3c72;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #1e3c72;
+            box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.1);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #2a5298, #3a6bd1);
+            transform: translateY(-2px);
+            box-shadow: 0 7px 14px rgba(30, 60, 114, 0.2);
+        }
+        
+        .contact-details h3 {
+            color: #1e3c72;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-item i {
+            background-color: #1e3c72;
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .contact-item p {
+            font-size: 1.1rem;
+            color: #333;
+        }
+        
+        /* Dashboard - Paneli ya Msimamizi */
+        .dashboard-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            display: none;
+        }
+        
+        .dashboard-container {
+            background-color: white;
+            width: 90%;
+            max-width: 1100px;
+            height: 90%;
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Sehemu ya kuingia/kujisajili */
+        .auth-section {
+            width: 40%;
+            padding: 3rem;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .auth-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            color: #ffcc00;
+        }
+        
+        .auth-section p {
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .auth-tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .auth-tab.active {
+            color: #ffcc00;
+            border-bottom: 3px solid #ffcc00;
+        }
+        
+        .auth-form {
+            display: none;
+        }
+        
+        .auth-form.active {
+            display: block;
+        }
+        
+        /* Sehemu ya dashboard ya matangazo */
+        .dashboard-main {
+            width: 60%;
+            padding: 3rem;
+            overflow-y: auto;
+            display: none;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .dashboard-header h2 {
+            color: #1e3c72;
+            font-size: 1.8rem;
+        }
+        
+        .close-dashboard {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .close-dashboard:hover {
+            background-color: #c0392b;
+        }
+        
+        .ad-form {
+            background-color: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .ad-form h3 {
+            color: #1e3c72;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .ads-list {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .ads-list h3 {
+            background-color: #1e3c72;
+            color: white;
+            padding: 1.2rem;
+            margin-bottom: 0;
+        }
+        
+        .ads-container {
+            padding: 0;
+        }
+        
+        .ad-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s;
+        }
+        
+        .ad-item:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .ad-item:last-child {
+            border-bottom: none;
+        }
+        
+        .ad-info h4 {
+            color: #1e3c72;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .ad-info p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .ad-type {
+            display: inline-block;
+            background-color: #e1f0ff;
+            color: #1e3c72;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .ad-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .ad-action-btn {
+            background-color: #1e3c72;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .ad-action-btn.edit:hover {
+            background-color: #2a5298;
+        }
+        
+        .ad-action-btn.delete {
+            background-color: #e74c3c;
+        }
+        
+        .ad-action-btn.delete:hover {
+            background-color: #c0392b;
+        }
+        
+        /* Staili za kujitambulisha mtumiaji */
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-left: 20px;
+            color: white;
+            font-weight: 500;
+        }
+        
+        .user-info i {
+            background-color: #ffcc00;
+            color: #1e3c72;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Staili za footer */
+        footer {
+            background-color: #1e3c72;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Staili za responsive */
+        @media (max-width: 992px) {
+            .dashboard-container {
+                flex-direction: column;
+                height: 95%;
+            }
+            
+            .auth-section, .dashboard-main {
+                width: 100%;
+            }
+            
+            .auth-section {
+                padding: 2rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 0 0.5rem;
+            }
+            
+            .home-content h2 {
+                font-size: 2.2rem;
+            }
+            
+            .home-content p {
+                font-size: 1.1rem;
+            }
+            
+            .services-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .auth-buttons {
+                margin-top: 10px;
+            }
+            
+            .ad-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .ad-actions {
+                align-self: flex-end;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-container {
+                width: 95%;
+                height: 95%;
+            }
+            
+            .auth-section, .dashboard-main {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Kichwa cha tovuti -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-dove"></i>
+                    <h1>Nyoni Business Hub</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home" class="active">Nyumbani</a></li>
+                        <li><a href="#services">Huduma</a></li>
+                        <li><a href="#contact">Mawasiliano</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <button class="auth-btn" id="loginBtn">Ingia</button>
+                    <button class="auth-btn" id="signupBtn">Jisajili</button>
+                    <div class="user-info" id="userInfo" style="display: none;">
+                        <i class="fas fa-user"></i>
+                        <span id="userName"></span>
+                    </div>
+                    <button class="auth-btn logout" id="logoutBtn">Toka</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sehemu ya Nyumbani -->
+    <section id="home">
+        <div class="container">
+            <div class="home-content">
+                <div class="welcome-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h2>Karibu kwenye Nyoni Business Hub!</h2>
+                <p>Huduma na bidhaa bora kwa wateja wetu. Tunatoa ufumbuzi wa kisasa na wa kuaminika kwa mahitaji yako yote ya biashara na kifedha.</p>
+                <p>Ungana nasi katika safari ya kukuza biashara yako kwa huduma bora zaidi na bei nafuu.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sehemu ya Huduma -->
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title">Huduma Zetu</h2>
+            <div class="services-container" id="servicesContainer">
+                <!-- Huduma zitaongezwa hapa kwa kiotomatiki -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Sehemu ya Mawasiliano -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Wasiliana Nasi</h2>
+            <div class="contact-container">
+                <div class="contact-form">
+                    <h3>Tuma Ujumbe</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Jina Lako:</label>
+                            <input type="text" id="name" class="form-control" placeholder="Ingiza jina lako" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Barua Pepe:</label>
+                            <input type="email" id="email" class="form-control" placeholder="Ingiza barua pepe yako" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Ujumbe Wako:</label>
+                            <textarea id="message" class="form-control" placeholder="Andika ujumbe wako hapa..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Tuma Ujumbe</button>
+                    </form>
+                </div>
+                
+                <div class="contact-details">
+                    <h3>Mawasiliano Yetu</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <p>Simu: <strong>255760003443</strong></p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>Barua Pepe: <strong>devnyoni@gmail.com</strong></p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>Mahali: <strong>Dar es Salaam, Tanzania</strong></p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <p>Saa za Kazi: <strong>Jumatatu - Ijumaa: 8:00 asubuhi - 6:00 jioni</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard - Paneli ya Msimamizi -->
+    <div class="dashboard-overlay" id="dashboardOverlay">
+        <div class="dashboard-container">
+            <!-- Sehemu ya kuingia/kujisajili -->
+            <div class="auth-section" id="authSection">
+                <h2>Nyoni Business Hub</h2>
+                <p>Ingia au jisajili kutumia dashboard ya matangazo yako</p>
+                
+                <div class="auth-tabs">
+                    <div class="auth-tab active" id="loginTab">Ingia</div>
+                    <div class="auth-tab" id="signupTab">Jisajili</div>
+                </div>
+                
+                <!-- Fomu ya kuingia -->
+                <form class="auth-form active" id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Barua Pepe</label>
+                        <input type="email" id="loginEmail" class="form-control" placeholder="devnyoni@gmail.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword">Nenosiri</label>
+                        <input type="password" id="loginPassword" class="form-control" placeholder="Ingiza nenosiri lako" required>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Ingia</button>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; text-align: center;">
+                    Akaunti ya mfano: devnyoni@gmail.com / nenosiri123
+                    </p>
+                </form>
+                
+                <!-- Fomu ya kujisajili -->
+                <form class="auth-form" id="signupForm">
+                    <div class="form-group">
+                        <label for="signupName">Jina Kamili</label>
+                        <input type="text" id="signupName" class="form-control" placeholder="Ingiza jina lako kamili" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupEmail">Barua Pepe</label>
+                        <input type="email" id="signupEmail" class="form-control" placeholder="Ingiza barua pepe yako" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupPassword">Nenosiri</label>
+                        <input type="password" id="signupPassword" class="form-control" placeholder="Unda nenosiri" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword">Thibitisha Nenosiri</label>
+                        <input type="password" id="confirmPassword" class="form-control" placeholder="Rudia nenosiri" required>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Jisajili</button>
+                </form>
+            </div>
+            
+            <!-- Sehemu ya dashboard ya matangazo -->
+            <div class="dashboard-main" id="dashboardMain">
+                <div class="dashboard-header">
+                    <h2>Dashboard ya Matangazo</h2>
+                    <button class="close-dashboard" id="closeDashboard">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <!-- Fomu ya kupakia tangazo -->
+                <div class="ad-form">
+                    <h3>Pakia Tangazo Jipya</h3>
+                    <form id="adForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="adTitle">Jina la Tangazo</label>
+                                <input type="text" id="adTitle" class="form-control" placeholder="Ingiza jina la tangazo" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="adType">Aina ya Tangazo</label>
+                                <select id="adType" class="form-control" required>
+                                    <option value="">Chagua aina</option>
+                                    <option value="Huduma">Huduma</option>
+                                    <option value="Bidhaa">Bidhaa</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="adImage">Picha ya Tangazo (URL)</label>
+                            <input type="url" id="adImage" class="form-control" placeholder="Ingiza URL ya picha ya tangazo">
+                            <small style="color: #666;">Au tumia picha ya chaguo-msingi ikiwa huna URL</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="adDescription">Maelezo ya Tangazo</label>
+                            <textarea id="adDescription" class="form-control" placeholder="Ingiza maelezo ya tangazo" rows="4" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="adPrice">Bei (Tsh)</label>
+                            <input type="number" id="adPrice" class="form-control" placeholder="Ingiza bei kwa shilingi" required>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn" id="saveAdBtn">Hifadhi Tangazo</button>
+                        <button type="button" class="submit-btn" id="cancelEditBtn" style="background-color: #6c757d; margin-top: 10px; display: none;">Ghairi</button>
+                    </form>
+                </div>
+                
+                <!-- Orodha ya matangazo -->
+                <div class="ads-list">
+                    <h3>Orodha ya Matangazo Yako</h3>
+                    <div class="ads-container" id="adsContainer">
+                        <!-- Matangazo yataonyeshwa hapa -->
+                        <div class="ad-item empty-ads" style="text-align: center; padding: 3rem; color: #666;">
+                            <p>Huna matangazo bado. Anza kwa kupakia tangazo lako la kwanza!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2023 Nyoni Business Hub. Haki zote zimehifadhiwa.</p>
+            <p>Huduma na bidhaa bora kwa wateja wetu</p>
+        </div>
+    </footer>
+
+    <script>
+        // Vigezo vya utawala
+        let currentUser = null;
+        let isEditing = false;
+        let currentEditAdId = null;
+        let userAds = {};
+        let allAds = [];
+
+        // Elementi muhimu za DOM
+        const dashboardOverlay = document.getElementById('dashboardOverlay');
+        const loginBtn = document.getElementById('loginBtn');
+        const signupBtn = document.getElementById('signupBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const closeDashboard = document.getElementById('closeDashboard');
+        const loginTab = document.getElementById('loginTab');
+        const signupTab = document.getElementById('signupTab');
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+        const authSection = document.getElementById('authSection');
+        const dashboardMain = document.getElementById('dashboardMain');
+        const adForm = document.getElementById('adForm');
+        const adsContainer = document.getElementById('adsContainer');
+        const servicesContainer = document.getElementById('servicesContainer');
+        const userInfo = document.getElementById('userInfo');
+        const userName = document.getElementById('userName');
+        const saveAdBtn = document.getElementById('saveAdBtn');
+        const cancelEditBtn = document.getElementById('cancelEditBtn');
+        
+        // Vigezo vya kuhifadhi watumiaji (kwa ajili ya mfano)
+        let users = JSON.parse(localStorage.getItem('nyoni_users')) || [];
+        
+        // Onyesha akaunti ya mfano ikiwa hakuna watumiaji
+        if (users.length === 0) {
+            users = [
+                {
+                    id: 1,
+                    name: "Nyoni Admin",
+                    email: "devnyoni@gmail.com",
+                    password: "nenosiri123"
+                }
+            ];
+            localStorage.setItem('nyoni_users', JSON.stringify(users));
+        }
+        
+        // Pakua matangazo yote
+        allAds = JSON.parse(localStorage.getItem('nyoni_ads')) || [];
+        
+        // Chaguo-msingi picha za matangazo
+        const defaultImages = [
+            "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+            "https://images.unsplash.com/photo-1556742044-3c52d6e88c62?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+            "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+        ];
+        
+        // Angalia ikiwa mtumiaji ameingia tayari
+        checkLoginStatus();
+        
+        // Kazi ya kuangalia hali ya kuingia
+        function checkLoginStatus() {
+            const loggedInUser = JSON.parse(localStorage.getItem('nyoni_current_user'));
+            if (loggedInUser) {
+                currentUser = loggedInUser;
+                updateUIForLoggedInUser();
+            }
+        }
+        
+        // Badilisha UI kwa mtumiaji aliyeingia
+        function updateUIForLoggedInUser() {
+            loginBtn.style.display = 'none';
+            signupBtn.style.display = 'none';
+            userInfo.style.display = 'flex';
+            logoutBtn.style.display = 'block';
+            userName.textContent = currentUser.name;
+            
+            // Onyesha matangazo ya mtumiaji
+            userAds = allAds.filter(ad => ad.userId === currentUser.id);
+            displayUserAds();
+            
+            // Onyesha matangazo yote kwenye tovuti
+            displayAllAds();
+        }
+        
+        // Badilisha UI kwa mtumiaji asiyeingia
+        function updateUIForLoggedOutUser() {
+            loginBtn.style.display = 'block';
+            signupBtn.style.display = 'block';
+            userInfo.style.display = 'none';
+            logoutBtn.style.display = 'none';
+            
+            // Onyesha matangazo yote kwenye tovuti
+            displayAllAds();
+        }
+        
+        // Onyesha matangazo yote kwenye sehemu ya huduma
+        function displayAllAds() {
+            servicesContainer.innerHTML = '';
+            
+            if (allAds.length === 0) {
+                // Onyesha matangazo ya chaguo-msingi ikiwa hakuna matangazo
+                const defaultAds = [
+                    {
+                        id: 1,
+                        title: "Usimamizi wa Mediasocial",
+                        description: "Tunakupa usimamizi wa akaunti zako za mediasocial, kuongeza wafuatiliaji na kushirikiana na wateja.",
+                        price: "150,000",
+                        type: "Huduma",
+                        image: defaultImages[0]
+                    },
+                    {
+                        id: 2,
+                        title: "Maandalizi ya Mabango ya Biashara",
+                        description: "Tunatengeneza mabango ya hali ya juu kwa biashara yako yenye muundo wa kisasa na wa kuvutia.",
+                        price: "80,000",
+                        type: "Bidhaa",
+                        image: defaultImages[1]
+                    }
+                ];
+                
+                defaultAds.forEach(ad => {
+                    servicesContainer.appendChild(createAdCard(ad));
+                });
+            } else {
+                allAds.forEach(ad => {
+                    servicesContainer.appendChild(createAdCard(ad));
+                });
+            }
+        }
+        
+        // Tengeneza kadi ya tangazo kwa tovuti
+        function createAdCard(ad) {
+            const card = document.createElement('div');
+            card.className = 'service-card';
+            card.setAttribute('data-id', ad.id);
+            
+            card.innerHTML = `
+                <div class="service-img">
+                    <img src="${ad.image || defaultImages[Math.floor(Math.random() * defaultImages.length)]}" alt="${ad.title}">
+                </div>
+                <div class="service-info">
+                    <span class="service-type">${ad.type}</span>
+                    <h3>${ad.title}</h3>
+                    <p>${ad.description}</p>
+                    <div class="service-price">Bei: Tsh ${ad.price}</div>
+                </div>
+            `;
+            
+            return card;
+        }
+        
+        // Onyesha matangazo ya mtumiaji kwenye dashboard
+        function displayUserAds() {
+            adsContainer.innerHTML = '';
+            
+            if (userAds.length === 0) {
+                adsContainer.innerHTML = `
+                    <div class="ad-item empty-ads" style="text-align: center; padding: 3rem; color: #666;">
+                        <p>Huna matangazo bado. Anza kwa kupakia tangazo lako la kwanza!</p>
+                    </div>
+                `;
+            } else {
+                userAds.forEach(ad => {
+                    adsContainer.appendChild(createAdItem(ad));
+                });
+            }
+        }
+        
+        // Tengeneza kipengee cha tangazo kwenye dashboard
+        function createAdItem(ad) {
+            const adItem = document.createElement('div');
+            adItem.className = 'ad-item';
+            adItem.setAttribute('data-id', ad.id);
+            
+            adItem.innerHTML = `
+                <div class="ad-info">
+                    <h4>${ad.title}</h4>
+                    <p>${ad.description.substring(0, 80)}${ad.description.length > 80 ? '...' : ''}</p>
+                    <span class="ad-type">${ad.type}</span>
+                    <p><strong>Bei: Tsh ${ad.price}</strong></p>
+                </div>
+                <div class="ad-actions">
+                    <button class="ad-action-btn edit" data-id="${ad.id}">Hariri</button>
+                    <button class="ad-action-btn delete" data-id="${ad.id}">Futa</button>
+                </div>
+            `;
+            
+            return adItem;
+        }
+        
+        // Fungua dashboard
+        function openDashboard() {
+            dashboardOverlay.style.display = 'flex';
+            
+            // Ikiwa mtumiaji ameingia, onyesha dashboard moja kwa moja
+            if (currentUser) {
+                authSection.style.display = 'none';
+                dashboardMain.style.display = 'block';
+                displayUserAds();
+            } else {
+                // Ikiwa mtumiaji hajaingia, onyesha fomu ya kuingia/kujisajili
+                authSection.style.display = 'block';
+                dashboardMain.style.display = 'none';
+                showLoginForm();
+            }
+        }
+        
+        // Funga dashboard
+        function closeDashboardFunc() {
+            dashboardOverlay.style.display = 'none';
+            resetAdForm();
+        }
+        
+        // Onyesha fomu ya kuingia
+        function showLoginForm() {
+            loginTab.classList.add('active');
+            signupTab.classList.remove('active');
+            loginForm.classList.add('active');
+            signupForm.classList.remove('active');
+        }
+        
+        // Onyesha fomu ya kujisajili
+        function showSignupForm() {
+            signupTab.classList.add('active');
+            loginTab.classList.remove('active');
+            signupForm.classList.add('active');
+            loginForm.classList.remove('active');
+        }
+        
+        // Sajili mtumiaji mpya
+        function signupUser(name, email, password) {
+            // Angalia ikiwa barua pepe tayari imesajiliwa
+            const existingUser = users.find(user => user.email === email);
+            if (existingUser) {
+                alert('Barua pepe hii tayari imesajiliwa. Tafadhali tumia barua pepe nyingine.');
+                return false;
+            }
+            
+            // Angalia ikiwa nenosiri linakubaliana
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            if (password !== confirmPassword) {
+                alert('Nenosiri halikubaliani. Tafadhali hakikisha nenosiri linakubaliana.');
+                return false;
+            }
+            
+            // Unda mtumiaji mpya
+            const newUser = {
+                id: users.length + 1,
+                name: name,
+                email: email,
+                password: password
+            };
+            
+            users.push(newUser);
+            localStorage.setItem('nyoni_users', JSON.stringify(users));
+            
+            // Ingiza mtumiaji moja kwa moja
+            loginUser(email, password);
+            return true;
+        }
+        
+        // Ingiza mtumiaji
+        function loginUser(email, password) {
+            const user = users.find(user => user.email === email && user.password === password);
+            
+            if (user) {
+                currentUser = user;
+                localStorage.setItem('nyoni_current_user', JSON.stringify(user));
+                updateUIForLoggedInUser();
+                
+                // Onyesha dashboard ya matangazo
+                authSection.style.display = 'none';
+                dashboardMain.style.display = 'block';
+                displayUserAds();
+                
+                alert(`Karibu ${user.name}!`);
+                return true;
+            } else {
+                alert('Barua pepe au nenosiri si sahihi. Tafadhali jaribu tena.');
+                return false;
+            }
+        }
+        
+        // Toka kwenye akaunti
+        function logoutUser() {
+            currentUser = null;
+            localStorage.removeItem('nyoni_current_user');
+            updateUIForLoggedOutUser();
+            closeDashboardFunc();
+            alert('Umefanikiwa kutoka kwenye akaunti yako.');
+        }
+        
+        // Hifadhi tangazo
+        function saveAd(title, type, image, description, price) {
+            if (isEditing) {
+                // Hariri tangazo lililopo
+                const adIndex = allAds.findIndex(ad => ad.id === currentEditAdId);
+                if (adIndex !== -1) {
+                    allAds[adIndex] = {
+                        ...allAds[adIndex],
+                        title: title,
+                        type: type,
+                        image: image || allAds[adIndex].image,
+                        description: description,
+                        price: price
+                    };
+                }
+                
+                // Pia hariri kwenye orodha ya mtumiaji
+                const userAdIndex = userAds.findIndex(ad => ad.id === currentEditAdId);
+                if (userAdIndex !== -1) {
+                    userAds[userAdIndex] = {
+                        ...userAds[userAdIndex],
+                        title: title,
+                        type: type,
+                        image: image || userAds[userAdIndex].image,
+                        description: description,
+                        price: price
+                    };
+                }
+                
+                alert('Tangazo limehaririwa kikamilifu.');
+                isEditing = false;
+                currentEditAdId = null;
+            } else {
+                // Ongeza tangazo jipya
+                const newAd = {
+                    id: allAds.length > 0 ? Math.max(...allAds.map(ad => ad.id)) + 1 : 1,
+                    userId: currentUser.id,
+                    userName: currentUser.name,
+                    title: title,
+                    type: type,
+                    image: image || defaultImages[Math.floor(Math.random() * defaultImages.length)],
+                    description: description,
+                    price: price,
+                    date: new Date().toISOString()
+                };
+                
+                allAds.push(newAd);
+                userAds.push(newAd);
+                
+                alert('Tangazo limeongezwa kikamilifu.');
+            }
+            
+            // Hifadhi matangazo
+            localStorage.setItem('nyoni_ads', JSON.stringify(allAds));
+            
+            // Sasisha maonyesho
+            displayUserAds();
+            displayAllAds();
+            
+            // Safisha fomu
+            resetAdForm();
+        }
+        
+        // Safisha fomu ya tangazo
+        function resetAdForm() {
+            adForm.reset();
+            isEditing = false;
+            currentEditAdId = null;
+            saveAdBtn.textContent = 'Hifadhi Tangazo';
+            cancelEditBtn.style.display = 'none';
+            document.getElementById('adForm').querySelector('h3').textContent = 'Pakia Tangazo Jipya';
+        }
+        
+        // Hariri tangazo
+        function editAd(adId) {
+            const ad = userAds.find(ad => ad.id === adId);
+            if (!ad) return;
+            
+            isEditing = true;
+            currentEditAdId = adId;
+            
+            // Jaza fomu na data ya tangazo
+            document.getElementById('adTitle').value = ad.title;
+            document.getElementById('adType').value = ad.type;
+            document.getElementById('adImage').value = ad.image;
+            document.getElementById('adDescription').value = ad.description;
+            document.getElementById('adPrice').value = ad.price;
+            
+            // Badilisha vichwa vya fomu
+            saveAdBtn.textContent = 'Hifadhi Mabadiliko';
+            cancelEditBtn.style.display = 'inline-block';
+            document.getElementById('adForm').querySelector('h3').textContent = 'Hariri Tangazo';
+            
+            // Tekeleza kwenye fomu
+            document.getElementById('adForm').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Futa tangazo
+        function deleteAd(adId) {
+            if (!confirm('Una uhakika unataka kufuta tangazo hili? Kitendo hiki hakiwezi kubatilishwa.')) {
+                return;
+            }
+            
+            // Ondoa kutoka kwenye matangazo yote
+            allAds = allAds.filter(ad => ad.id !== adId);
+            
+            // Ondoa kutoka kwenye matangazo ya mtumiaji
+            userAds = userAds.filter(ad => ad.id !== adId);
+            
+            // Hifadhi matangazo
+            localStorage.setItem('nyoni_ads', JSON.stringify(allAds));
+            
+            // Sasisha maonyesho
+            displayUserAds();
+            displayAllAds();
+            
+            alert('Tangazo limefutwa kikamilifu.');
+        }
+        
+        // Usikilizaji wa matukio
+        loginBtn.addEventListener('click', openDashboard);
+        signupBtn.addEventListener('click', () => {
+            openDashboard();
+            showSignupForm();
+        });
+        
+        logoutBtn.addEventListener('click', logoutUser);
+        closeDashboard.addEventListener('click', closeDashboardFunc);
+        
+        // Bofya nje ya dashboard kufunga
+        dashboardOverlay.addEventListener('click', (e) => {
+            if (e.target === dashboardOverlay) {
+                closeDashboardFunc();
+            }
+        });
+        
+        // Usikilizaji wa tabu za kuingia/kujisajili
+        loginTab.addEventListener('click', showLoginForm);
+        signupTab.addEventListener('click', showSignupForm);
+        
+        // Usindikaji wa fomu ya kuingia
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            loginUser(email, password);
+        });
+        
+        // Usindikaji wa fomu ya kujisajili
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            signupUser(name, email, password);
+        });
+        
+        // Usindikaji wa fomu ya tangazo
+        adForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            if (!currentUser) {
+                alert('Tafadhali ingia kwanza kwa kutumia akaunti yako.');
+                return;
+            }
+            
+            const title = document.getElementById('adTitle').value;
+            const type = document.getElementById('adType').value;
+            const image = document.getElementById('adImage').value;
+            const description = document.getElementById('adDescription').value;
+            const price = document.getElementById('adPrice').value;
+            
+            if (!title || !type || !description || !price) {
+                alert('Tafadhali jaza sehemu zote zinazohitajika.');
+                return;
+            }
+            
+            saveAd(title, type, image, description, price);
+        });
+        
+        // Usikilizaji wa kitufe cha kughairi kuhariri
+        cancelEditBtn.addEventListener('click', resetAdForm);
+        
+        // Usikilizaji wa vitendo vya matangazo (hariri/futa)
+        adsContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('edit')) {
+                const adId = parseInt(e.target.getAttribute('data-id'));
+                editAd(adId);
+            }
+            
+            if (e.target.classList.contains('delete')) {
+                const adId = parseInt(e.target.getAttribute('data-id'));
+                deleteAd(adId);
+            }
+        });
+        
+        // Usindikaji wa fomu ya mawasiliano
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // Kwa mfumo halisi, hapa ungetuma data kwa seva
+            alert(`Asante ${name}! Ujumbe wako umepokelewa. Tutawasiliana nawe kupitia ${email} hivi karibuni.`);
+            
+            // Futa fomu
+            this.reset();
+        });
+        
+        // Usikilizaji wa viungo vya navigesheni
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Ondoa darasa la "active" kutoka kwa viungo vyote
+                document.querySelectorAll('nav a').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Ongeza darasa la "active" kwa kiungo kilichobofya
+                this.classList.add('active');
+                
+                // Tekeleza kwenye sehemu inayohusika
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetSection.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+                
+                // Zuia kitendo cha kawaida cha kiungo
+                e.preventDefault();
+            });
+        });
+        
+        // Badilisha kiungo kinachoonyesha sehemu ya sasa
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Onyesha matangazo ya chaguo-msingi kwenye kuanza
+        displayAllAds();
+    </script>
+</body>
+</html>
+
+
